@@ -266,6 +266,42 @@ try:
 except Exception:
     LimeTabularExplainer = None
 
+import matplotlib
+import platform
+import os
+
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+import os
+import streamlit as st
+
+FONT_PATH = "fonts/NanumGothic.ttf"
+
+try:
+    if os.path.exists(FONT_PATH):
+        fm.fontManager.addfont(FONT_PATH)
+
+        font_prop = fm.FontProperties(fname=FONT_PATH)
+        plt.rcParams["font.family"] = font_prop.get_name()
+
+        st.sidebar.success("NanumGothic 적용")
+
+    else:
+        st.sidebar.warning(
+            f"NanumGothic.ttf 없음 ({FONT_PATH}) → 기본 폰트 사용"
+        )
+
+except Exception as e:
+    st.sidebar.warning(
+        f"폰트 로드 실패 → 기본 폰트 사용 ({e})"
+    )
+
+plt.rcParams["axes.unicode_minus"] = False
+
+plt.rcParams['axes.unicode_minus'] = False
+
+st.set_page_config(layout="wide")
+
 # -------------------------------------------------------------
 # 기본 설정
 # -------------------------------------------------------------
